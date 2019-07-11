@@ -7,7 +7,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @categories = Category.all
+    @categories = Category.query
 
     respond_to_index
   end
