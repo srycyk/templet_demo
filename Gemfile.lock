@@ -1,3 +1,15 @@
+GIT
+  remote: https://github.com/srycyk/templet
+  revision: aecd6de311d7aca6a1f1cc09518fcf841b8d0be7
+  specs:
+    templet (0.1.1)
+
+GIT
+  remote: https://github.com/srycyk/templet_rails
+  revision: 11564eadada25f07fad5dad0edd490b1f54c3294
+  specs:
+    templet_rails (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -250,6 +262,8 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
+  templet!
+  templet_rails!
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)

@@ -77,3 +77,6 @@ gem 'bootstrap-sass', '~> 3.3.7'
 
 gem 'kaminari'
 
+gem 'templet', git: 'https://github.com/srycyk/templet'
+gem 'templet_rails', git: 'https://github.com/srycyk/templet_rails'
+

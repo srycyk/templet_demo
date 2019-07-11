@@ -1,24 +1,163 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Templet Demo
 
-Things you may want to cover:
+## Introduction
 
-* Ruby version
+This is a very small (and useless) Rails app that demonstrates
+the two gems,
+[templet](https://github.com/srycyk/templet)
+and
+[templet\_rails](https://github.com/srycyk/templet_rails),
+the latter of which is actually a Rails Engine.
 
-* System dependencies
+These two gems make up a framework that provides a new way
+to render views in Rails without resorting to markup scripts.
 
-* Configuration
+Since the framework's view rendering relies solely on Ruby classes,
+it's compact and object oriented.
 
-* Database creation
+The README's of these two gems have more detailed notes than
+what's stated here.
 
-* Database initialization
+However, the source of this app has fairly comprehensive
+examples that show how to alter and extend an everyday REST app
+within this *templet* framework.
 
-* How to run the test suite
+## Overview
 
-* Services (job queues, cache servers, search engines, etc.)
+This app uses a standard Rails 5.2 rig, with Bootstrap 3.3 and SQLite.
 
-* Deployment instructions
+It has the gems *rspec*, *factory_bot* and *kaminari* (for paging) added,
+but these are optional.
 
-* ...
+The core of the application is just three models,
+for which there are migrations, factories,
+and specs (which have too few tests).
+In addition, there's a *db/seeds.rb* file (to set up sample data).
+
+> These models are *Category*, *Question* and *Answer*.
+
+Using just these three models as a base, the app shows how easy it is
+to build an administrative REST interface with the aid of
+these two *templet* gems.
+
+First of all, a basic REST interface is generated from the command line,
+with the use of the generators in the *templet_rails* engine.
+This produces fully working code that may be subsequently modified.
+_This code consists of controllers and other classes that render markup._
+
+Using this (generated) code as a beginning,
+the examples go through the kinds of enhancements
+that you may be called on to implement.
+For instance, adding new controllers,
+adding actions to existing controllers,
+varying the HTML layouts,
+enforcing consistent styling (e.g. of buttons &amp; links),
+and specifying fields in HTML forms, tables &amp; lists.
+
+## Installation Scripts
+
+To lead you through the generation process,
+there are three scripts provided that invoke the generators
+that come with the engine *templet_rails*:
+
+* **bin/templet/install.sh** which prepares a foundational
+  application area in your app's file system.
+
+* **bin/templet/scaffold.sh** which generates a REST interface for
+  the three models, which comprises controllers, views and tests.
+
+* **bin/templet/deinstall.sh** which erases the framework along with the
+  controller and view code - leaving nothing behind,
+  apart from a few entries in *config/routes.rb*.
+
+Even if you don't run these scripts yourself,
+they may be worth taking a look at because they
+show how to invoke the generators
+with the various (command-line) options.
+
+## Customisation
+
+In this framework, all of the tailoring for the views is
+made under the directory, *app/helpers/app/*.
+
+### Rendering Views for a Controller
+
+The view markup, for each of the actions of the controllers,
+is rendered from inside of a Viewer class, which,
+for this particular app,
+are named thus: *app/helpers/app/admin/\*_viewer.rb*.
+There is one of these classes for each controller.
+
+> These classes make use of the API in lots of different ways,
+> and the source has many explanatory comments.
+
+### Layouts and Shared Components
+
+There is another sub-directory, *app/helpers/app/layouts/*,
+whose classes (and modules) render the (outer) HTML
+which is shared by an assortment of pages.
+
+These classes serve a similar purpose as the Rails' templates
+in the directory *app/views/layout/*.
+
+Also under the sub-directory, *app/helpers/layouts/*,
+there are subclasses that add supplementary HTML links to the menus
+of REST actions (provided by default).
+These classes have the word *links* in their name.
+
+This directory tree also has some configuration classes and utilities.
+
+> This tree is set up in the *app* installation,
+> i.e. by the first shell script mentioned above.
+
+### Other Application Files
+
+Also, there are controllers and Rspec tests added,
+but the alterations (to the generated code) made here are few.
+
+One exception is the Ruby module,
+in the file *app/controllers/admin/questions\_extras.rb*,
+which is prepended to the *questions* controller.
+This module adds extra actions and overrides a few existing ones.
+_It's implemented in this clumsy way for instruction only._
+
+## Git Branches
+
+There are three branches:
+
+* **baseline** which is very bare. It consists of a basic Rails setup
+  and the, above mentioned, three models with ancillary code.
+  It has neither controllers nor views (markup code).
+
+* **scaffold** which contains the above, and, in addition,
+  the code produced after running a series of generators.
+  This resultant code is generated by the two scripts:
+    1. bin/templet/install.sh
+    2. bin/templet/scaffold.sh
+
+* **master** which is the final version, consisting of the above code
+  interspersed with lots of manual code changes that illustrate how
+  various modifications can be applied.
+  _This branch's revision history shows the steps involved
+  in constructing a simple application in this framework._
+
+## Running the Application
+
+To run the app locally, key in the following:
+
+```
+$ git clone http://github.com/srycyk/templet_demo/
+$ cd templet_demo
+$ bundle
+$ rake db:create
+$ rake db:migrate
+$ rake db:seed
+$ rails s
+```
+
+<!--
+There is also a working instance here **soon**:
+[templet_demo](https://heroku.com/)
+-->
+
