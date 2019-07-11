@@ -2,6 +2,9 @@
 class Admin::QuestionsController < ApplicationController
   include Templet::ViewerResponders
 
+  # Override and add various actions. Done like this for demo purposes!
+  prepend Admin::QuestionsExtras
+
   before_action :set_category
 
   before_action :set_question, only: %i(show edit update destroy)
