@@ -14,5 +14,8 @@ Rails.application.routes.draw do
     resources(:questions, only: []) { resources :answers }
   end
 
+  get 'listing', to: 'listing#index',
+                 constraints: -> req { req.format == :html }
+
   root to: 'admin/categories#index'
 end
