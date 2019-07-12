@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
         put :reinstate, on: :member
       end
+      resources :replies, only: %i(index show), format: /html|js/
     end
     resources(:questions, only: []) { resources :answers }
   end
